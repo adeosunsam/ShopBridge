@@ -59,11 +59,11 @@ namespace ShopBridge_services.Implementations
             if (check != null)
             {
                 var mapData = _mapper.Map<Product>(product);
-                await _unit.Product.InsertAsync(mapData);
+                _unit.Product.Update(mapData);
                 await _unit.Save();
-                return Response<bool>.Success("Product successfully added", true);
+                return Response<bool>.Success("Product successfully updated", true);
             }
-            return Response<bool>.Fail("Product already existed", StatusCodes.Status409Conflict);
+            return Response<bool>.Fail("Product not found", StatusCodes.Status404NotFound);
         }
     }
 }

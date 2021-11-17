@@ -11,5 +11,6 @@ namespace ShopBridge_services.Interfaces
         Task<Response<PageResult<IEnumerable<ProductsDto>>>> GetAllproducts(PagingDto paging);
         Task<Response<bool>> Addproduct(ProductsDto product);
         Task<Response<bool>> DeleteProduct(string id);
+        Task<Response<bool>> Updateproduct(string id, ProductsDto product);
     }
 }

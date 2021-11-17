@@ -42,5 +42,13 @@ namespace ShopBridge_api.Controllers
             var deleteProduct = await _product.DeleteProduct(id);
             return StatusCode(deleteProduct.StatusCode, deleteProduct);
         }
+
+        [HttpPatch]
+        [Route("update-product")]
+        public async Task<IActionResult> UpdateProduct(string id, ProductsDto product)
+        {
+            var updateProduct = await _product.Updateproduct(id,product);
+            return Ok(updateProduct);
+        }
     }
 }
