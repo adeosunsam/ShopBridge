@@ -45,7 +45,7 @@ namespace ShopBridge_api.Controllers
 
         [HttpPatch]
         [Route("update-product")]
-        public async Task<IActionResult> UpdateProduct(string id, ProductsDto product)
+        public async Task<IActionResult> UpdateProduct(string id, UpdateDto product)
         {
             var updateProduct = await _product.Updateproduct(id,product);
             return Ok(updateProduct);

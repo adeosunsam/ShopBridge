@@ -53,7 +53,7 @@ namespace ShopBridge_services.Implementations
             return Response<bool>.Fail("Product not found", StatusCodes.Status404NotFound);
         }
 
-        public async Task<Response<bool>> Updateproduct(string id, ProductsDto product)
+        public async Task<Response<bool>> Updateproduct(string id, UpdateDto product)
         {
             var check = await _unit.Product.GetProductById(id);
             if (check != null)
