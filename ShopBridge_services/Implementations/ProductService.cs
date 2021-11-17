@@ -44,6 +44,26 @@ namespace ShopBridge_services.Implementations
         public async Task<Response<bool>> DeleteProduct(string id)
         {
             var check = await _unit.Product.GetProductById(id);
+            if (check != null)
+            {
+                _unit.Product.Delete(check);
+                await _unit.Save();
+                return Response<bool>.Success("Product successfully deleted", true);
+            }
+            return Response<bool>.Fail("Product not found", StatusCodes.Status404NotFound);
+        }
+
+        public async Task<Response<bool>> Updateproduct(string id, ProductsDto product)
+        {
+            var check = await _unit.Product.GetProductById(id);
+            if (check != null)
+            {
+                var mapData = _mapper.Map<Product>(product);
+                await _unit.Product.InsertAsync(mapData);
+                await _unit.Save();
+                return Response<bool>.Success("Product successfully added", true);
+            }
+            return Response<bool>.Fail("Product already existed", StatusCodes.Status409Conflict);
         }
     }
 }

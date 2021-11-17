@@ -32,7 +32,15 @@ namespace ShopBridge_api.Controllers
         public async Task<IActionResult> AddProduct(ProductsDto product)
         {
             var addNewProduct = await _product.Addproduct(product);
-            return Ok(addNewProduct);
+            return Created("",addNewProduct);
+        }
+
+        [HttpDelete]
+        [Route("delete-product")]
+        public async Task<IActionResult> Deleteproduct(string id)
+        {
+            var deleteProduct = await _product.DeleteProduct(id);
+            return StatusCode(deleteProduct.StatusCode, deleteProduct);
         }
     }
 }
