@@ -33,7 +33,5 @@ namespace ShopBridge_data.Contexts
             }
             return await base.SaveChangesAsync(cancellationToken);
         }
-
-        
     }
 }

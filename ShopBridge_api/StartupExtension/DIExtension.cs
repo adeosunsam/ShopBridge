@@ -12,8 +12,7 @@ namespace ShopBridge_api.StartupExtension
     {
         public static void ConfigureInjection(this IServiceCollection service, IConfiguration config)
         {
-            //authentication service
-            service.AddScoped<IAuthenticationServices, AuthenticationServices>();
+            //product service
             service.AddScoped<IProductService, ProductService>();
 
             //image service

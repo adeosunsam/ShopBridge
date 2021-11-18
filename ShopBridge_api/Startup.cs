@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -8,8 +7,6 @@ using Microsoft.OpenApi.Models;
 using ShopBridge_api.GlobalErrorMiddleware;
 using ShopBridge_api.StartupExtension;
 using ShopBridge_data.Contexts;
-using ShopBridge_data.SeederClass;
-using ShopBridge_model;
 
 namespace ShopBridge_api
 {
@@ -32,7 +29,7 @@ namespace ShopBridge_api
 
             //setup identity extension in case you are looking to extend Policies
 
-            services.ConfigureIdentity();
+            //services.ConfigureIdentity();
             
             services.AddControllers();
 

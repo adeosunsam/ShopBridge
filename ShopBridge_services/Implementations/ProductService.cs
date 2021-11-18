@@ -7,7 +7,6 @@ using ShopBridge_repo.Interfaces;
 using ShopBridge_services.Interfaces;
 using ShopBridge_utilities;
 using System.Collections.Generic;
-using System.Net;
 using System.Threading.Tasks;
 
 namespace ShopBridge_services.Implementations
