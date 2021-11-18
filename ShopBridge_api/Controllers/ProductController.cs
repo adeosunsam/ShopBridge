@@ -2,9 +2,6 @@
 using ShopBridge_dtos;
 using ShopBridge_dtos.ProductDto;
 using ShopBridge_services.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace ShopBridge_api.Controllers

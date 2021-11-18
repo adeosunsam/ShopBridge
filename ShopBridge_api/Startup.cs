@@ -31,13 +31,14 @@ namespace ShopBridge_api
             services.AddDbContextAndConfigurations(Environment, Configuration);
 
             //setup identity extension in case you are looking to extend Policies
-            services.ConfigureIdentity();
 
+            services.ConfigureIdentity();
+            
             services.AddControllers();
 
             //setup dependency injection
-            services.ConfigureInjection();
-
+            services.ConfigureInjection();  
+            
             //configure automapper
             services.AutoMapperExtension();
 
