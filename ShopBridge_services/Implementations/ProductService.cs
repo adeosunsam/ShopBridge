@@ -7,6 +7,7 @@ using ShopBridge_repo.Interfaces;
 using ShopBridge_services.Interfaces;
 using ShopBridge_utilities;
 using System.Collections.Generic;
+using System.Net;
 using System.Threading.Tasks;
 
 namespace ShopBridge_services.Implementations
@@ -15,10 +16,13 @@ namespace ShopBridge_services.Implementations
     {
         private readonly IUnitOfWork _unit;
         private readonly IMapper _mapper;
-        public ProductService(IUnitOfWork unit, IMapper mapper)
+        private readonly IImageService _imageService;
+
+        public ProductService(IUnitOfWork unit, IMapper mapper, IImageService imageService)
         {
             _unit = unit;
             _mapper = mapper;
+            _imageService = imageService;
         }
 
         public async Task<Response<PageResult<IEnumerable<ProductResponseDto>>>> GetAllproducts(PagingDto paging)
@@ -65,6 +69,21 @@ namespace ShopBridge_services.Implementations
                 _unit.Product.Update(check);
                 await _unit.Save();
                 return Response<bool>.Success("Product successfully updated", true);
+            }
+            return Response<bool>.Fail("Product not found", StatusCodes.Status404NotFound);
+        }
+
+        public async Task<Response<bool>> UpdateImage(string ProductId, ImageDTo image)
+        {
+            var check = await _unit.Product.GetProductById(ProductId);
+            if (check != null)
+            {
+                var uploadImage = await _imageService.UploadImage(image.Image);
+
+                check.ThumbNail = uploadImage.Url.ToString();
+                _unit.Product.Update(check);
+                await _unit.Save();
+                return Response<bool>.Success("Product image successfully updated", true);
             }
             return Response<bool>.Fail("Product not found", StatusCodes.Status404NotFound);
         }

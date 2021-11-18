@@ -10,13 +10,12 @@ namespace ShopBridge_api.Controllers
     [Route("api/[Controller]")]
     public class ProductController : ControllerBase
     {
-        public ProductController(IProductService product, IImageService imageService)
+        public ProductController(IProductService product)
         {
             _product = product;
-            _imageService = imageService;
         }
         private readonly IProductService _product;
-        private readonly IImageService _imageService;
+        
 
         [HttpGet]
         [Route("get-all")]
@@ -55,11 +54,7 @@ namespace ShopBridge_api.Controllers
         public async Task<IActionResult> Image(string productId, [FromForm] ImageDTo image)
         {
 
-            var upload = await _imageService.UploadImage(image.Image);
-
-            /* user.ProfilePics = upload.Url.ToString();
-             await _userManager.UpdateAsync(user);*/
-
+            await _product.UpdateImage(productId, image);
             return NoContent();
         }
     }

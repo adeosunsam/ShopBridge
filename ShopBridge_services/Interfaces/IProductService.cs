@@ -12,5 +12,6 @@ namespace ShopBridge_services.Interfaces
         Task<Response<bool>> Addproduct(ProductsDto product);
         Task<Response<bool>> DeleteProduct(string id);
         Task<Response<bool>> Updateproduct(string id, UpdateDto product);
+        Task<Response<bool>> UpdateImage(string ProductId, ImageDTo image);
     }
 }
