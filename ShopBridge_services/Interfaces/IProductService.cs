@@ -8,7 +8,7 @@ namespace ShopBridge_services.Interfaces
 {
     public interface IProductService
     {
-        Task<Response<PageResult<IEnumerable<ProductsDto>>>> GetAllproducts(PagingDto paging);
+        Task<Response<PageResult<IEnumerable<ProductResponseDto>>>> GetAllproducts(PagingDto paging);
         Task<Response<bool>> Addproduct(ProductsDto product);
         Task<Response<bool>> DeleteProduct(string id);
         Task<Response<bool>> Updateproduct(string id, UpdateDto product);

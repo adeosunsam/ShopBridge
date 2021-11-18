@@ -11,6 +11,7 @@ namespace ShopBridge_utilities.MapperClass
             //product Mapping
             //CreateMap<Product, ProductsDto>();
             CreateMap<Product, ProductsDto>().ReverseMap();
+            CreateMap<Product, ProductResponseDto>();
             CreateMap<Product, UpdateDto>().ReverseMap();
         }
     }

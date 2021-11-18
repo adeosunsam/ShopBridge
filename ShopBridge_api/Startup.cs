@@ -37,7 +37,7 @@ namespace ShopBridge_api
             services.AddControllers();
 
             //setup dependency injection
-            services.ConfigureInjection();  
+            services.ConfigureInjection(Configuration);  
             
             //configure automapper
             services.AutoMapperExtension();

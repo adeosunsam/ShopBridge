@@ -10,15 +10,17 @@ namespace ShopBridge_api.Controllers
     [Route("api/[Controller]")]
     public class ProductController : ControllerBase
     {
-        public ProductController(IProductService product)
+        public ProductController(IProductService product, IImageService imageService)
         {
             _product = product;
+            _imageService = imageService;
         }
         private readonly IProductService _product;
+        private readonly IImageService _imageService;
 
         [HttpGet]
         [Route("get-all")]
-        public async Task<IActionResult> GetProducts([FromQuery]PagingDto paging)
+        public async Task<IActionResult> GetProducts([FromQuery] PagingDto paging)
         {
             var getAllproducts = await _product.GetAllproducts(paging);
             return Ok(getAllproducts);
@@ -29,7 +31,7 @@ namespace ShopBridge_api.Controllers
         public async Task<IActionResult> AddProduct(ProductsDto product)
         {
             var addNewProduct = await _product.Addproduct(product);
-            return Created("",addNewProduct);
+            return Created("", addNewProduct);
         }
 
         [HttpDelete]
@@ -44,8 +46,21 @@ namespace ShopBridge_api.Controllers
         [Route("update-product")]
         public async Task<IActionResult> UpdateProduct(string id, UpdateDto product)
         {
-            var updateProduct = await _product.Updateproduct(id,product);
+            var updateProduct = await _product.Updateproduct(id, product);
             return Ok(updateProduct);
+        }
+
+        [HttpPut]
+        [Route("add-image")]
+        public async Task<IActionResult> Image(string productId, [FromForm] ImageDTo image)
+        {
+
+            var upload = await _imageService.UploadImage(image.Image);
+
+            /* user.ProfilePics = upload.Url.ToString();
+             await _userManager.UpdateAsync(user);*/
+
+            return NoContent();
         }
     }
 }

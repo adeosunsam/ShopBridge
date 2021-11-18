@@ -21,11 +21,11 @@ namespace ShopBridge_services.Implementations
             _mapper = mapper;
         }
 
-        public async Task<Response<PageResult<IEnumerable<ProductsDto>>>> GetAllproducts(PagingDto paging)
+        public async Task<Response<PageResult<IEnumerable<ProductResponseDto>>>> GetAllproducts(PagingDto paging)
         {
             var products = _unit.Product.GetProducts();
-            var item = await products.PaginationAsync<Product, ProductsDto>(paging.PageSize, paging.PageNumber, _mapper);
-            return Response<PageResult<IEnumerable<ProductsDto>>>.Success("All Products on Display", item, StatusCodes.Status200OK);
+            var item = await products.PaginationAsync<Product, ProductResponseDto>(paging.PageSize, paging.PageNumber, _mapper);
+            return Response<PageResult<IEnumerable<ProductResponseDto>>>.Success("All Products on Display", item, StatusCodes.Status200OK);
         }
 
         public async Task<Response<bool>> Addproduct(ProductsDto product)

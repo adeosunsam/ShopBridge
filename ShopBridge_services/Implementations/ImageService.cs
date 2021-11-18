@@ -13,7 +13,6 @@ namespace ShopBridge_services.Implementations
 {
     public class ImageService : IImageService
     {
-        private readonly IConfiguration _configuration;
         private readonly Cloudinary _cloudinary;
         private readonly ImageSettings _imageSettings;
 
@@ -21,7 +20,6 @@ namespace ShopBridge_services.Implementations
             IOptions<ImageSettings> imageSettings)
         {
             _imageSettings = imageSettings.Value;
-            _configuration = configuration;
             _cloudinary = new Cloudinary(new Account(_imageSettings.AccountName,
                 _imageSettings.ApiKey, _imageSettings.ApiSecret));
         }
