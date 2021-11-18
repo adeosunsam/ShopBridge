@@ -11,7 +11,7 @@ namespace ShopBridge_api.StartupExtension
         public static void ConfigureInjection(this IServiceCollection service)
         {
             //authentication service
-            service.AddTransient<IAuthenticationServices, AuthenticationServices>();
+            service.AddScoped<IAuthenticationServices, AuthenticationServices>();
             service.AddScoped<IProductService, ProductService>();
 
             //Iunitofwork injection

@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
-using Serilog;
 using ShopBridge_dtos;
 using System;
 using System.Net;
@@ -11,10 +11,10 @@ namespace ShopBridge_api.GlobalErrorMiddleware
     public class ExceptionMiddleware
     {
         private readonly RequestDelegate _next;
-        private readonly ILogger _logger;
+        private readonly ILogger<ExceptionMiddleware> _logger;
 
         public ExceptionMiddleware(RequestDelegate next,
-            ILogger logger)
+            ILogger<ExceptionMiddleware> logger)
         {
             _logger = logger;
             _next = next;
@@ -35,23 +35,23 @@ namespace ShopBridge_api.GlobalErrorMiddleware
                 switch (error)
                 {
                     case UnauthorizedAccessException e:
-                        _logger.Error(e, e.StackTrace, e.Source, e.ToString());
+                        _logger.LogError(e, e.StackTrace, e.Source, e.ToString());
                         response.StatusCode = (int)HttpStatusCode.Unauthorized;
                         responseModel.Message = e.Message;
                         break;
                     case ArgumentOutOfRangeException e:
-                        _logger.Error(e, e.StackTrace, e.Source, e.ToString());
+                        _logger.LogError(e, e.StackTrace, e.Source, e.ToString());
                         response.StatusCode = (int)HttpStatusCode.BadRequest;
                         responseModel.Message = e.Message;
                         break;
                     case ArgumentNullException e:
-                        _logger.Error(e, e.StackTrace, e.Source, e.ToString());
+                        _logger.LogError(e, e.StackTrace, e.Source, e.ToString());
                         response.StatusCode = (int)HttpStatusCode.BadRequest;
                         responseModel.Message = e.Message;
                         break;
                     default:
                         // unhandled error
-                        _logger.Error(error, error.Source, error.InnerException, error.Message, error.ToString());
+                        _logger.LogError(error, error.Source, error.InnerException, error.Message, error.ToString());
                         response.StatusCode = (int)HttpStatusCode.InternalServerError;
                         responseModel.Message = "Internal Server Error. Please Try Again Later.";
                         break;

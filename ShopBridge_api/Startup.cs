@@ -30,7 +30,7 @@ namespace ShopBridge_api
             //setup database connection for both development and production
             services.AddDbContextAndConfigurations(Environment, Configuration);
 
-            //setup identity extension
+            //setup identity extension in case you are looking to extend Policies
             services.ConfigureIdentity();
 
             services.AddControllers();
