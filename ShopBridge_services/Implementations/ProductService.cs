@@ -58,8 +58,11 @@ namespace ShopBridge_services.Implementations
             var check = await _unit.Product.GetProductById(id);
             if (check != null)
             {
-                var mapData = _mapper.Map<Product>(product);
-                _unit.Product.Update(mapData);
+                check.ProductName = string.IsNullOrWhiteSpace(product.ProductName) ? check.ProductName : product.ProductName;
+                check.ProductPrice = product.ProductPrice == 0 ? check.ProductPrice : product.ProductPrice;
+                check.Description = string.IsNullOrWhiteSpace(product.Description) ? check.Description : product.Description;
+
+                _unit.Product.Update(check);
                 await _unit.Save();
                 return Response<bool>.Success("Product successfully updated", true);
             }

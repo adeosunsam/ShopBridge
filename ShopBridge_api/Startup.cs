@@ -5,6 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using ShopBridge_api.GlobalErrorMiddleware;
 using ShopBridge_api.StartupExtension;
 using ShopBridge_data.Contexts;
 using ShopBridge_data.SeederClass;
@@ -60,6 +61,9 @@ namespace ShopBridge_api
             app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "ShopBridge_api v1"));
 
             RbaSeeder.Seeder(userManager, context, roleManager).Wait();
+
+            //setup global error handling middleware
+            app.UseMiddleware<ExceptionMiddleware>();
 
             //get result from a single project
             app.UseRouting();
