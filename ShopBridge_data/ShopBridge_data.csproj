@@ -18,4 +18,8 @@
     <ProjectReference Include="..\ShopBridge_utilities\ShopBridge_utilities.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="SeederClass\" />
+  </ItemGroup>
+
 </Project>

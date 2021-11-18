@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ShopBridge_data.Contexts
 {
-    public class ShopDbContext : IdentityDbContext<AppUsers>
+    public class ShopDbContext : DbContext
     {
         public ShopDbContext(DbContextOptions<ShopDbContext> getData) : base(getData)
         {
@@ -34,12 +34,6 @@ namespace ShopBridge_data.Contexts
             return await base.SaveChangesAsync(cancellationToken);
         }
 
-        /*protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            base.OnModelCreating(modelBuilder);
-
-            modelBuilder.Entity<Customer>()
-                .HasKey(x => x.Users.Id);
-        }*/
+        
     }
 }

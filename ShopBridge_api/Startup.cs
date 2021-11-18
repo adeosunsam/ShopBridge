@@ -49,8 +49,7 @@ namespace ShopBridge_api
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, UserManager<AppUsers> userManager,
-            ShopDbContext context, RoleManager<IdentityRole> roleManager)
+        public void Configure(IApplicationBuilder app, ShopDbContext context)
         {
             var env = app.ApplicationServices.GetService<IWebHostEnvironment>();
             if (env.IsDevelopment())
@@ -61,7 +60,7 @@ namespace ShopBridge_api
             app.UseSwagger();
             app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "ShopBridge_api v1"));
 
-            RbaSeeder.Seeder(userManager, context, roleManager).Wait();
+            context.Database.EnsureCreatedAsync().Wait();
 
             //setup global error handling middleware
             app.UseMiddleware<ExceptionMiddleware>();
