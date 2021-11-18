@@ -14,6 +14,9 @@ namespace ShopBridge_api.StartupExtension
             service.AddScoped<IAuthenticationServices, AuthenticationServices>();
             service.AddScoped<IProductService, ProductService>();
 
+            //image service
+            service.AddScoped<IImageService, ImageService>();
+
             //Iunitofwork injection
             service.AddScoped<IUnitOfWork, UnitOfWork>();
         }
