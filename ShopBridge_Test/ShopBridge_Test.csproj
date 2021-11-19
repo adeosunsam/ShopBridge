@@ -24,6 +24,7 @@
   <ItemGroup>
     <ProjectReference Include="..\ShopBridge_data\ShopBridge_data.csproj" />
     <ProjectReference Include="..\ShopBridge_repo\ShopBridge_repo.csproj" />
+    <ProjectReference Include="..\ShopBridge_services\ShopBridge_services.csproj" />
   </ItemGroup>
 
 </Project>

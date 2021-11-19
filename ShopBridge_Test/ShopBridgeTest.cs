@@ -1,6 +1,5 @@
 using ShopBridge_model;
 using ShopBridge_repo.Repository.Implementations;
-using System;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -8,15 +7,30 @@ namespace ShopBridge_Test
 {
     public class ShopBridgeTest
     {
+
         [Fact]
-        public async Task Test_DbClass()
+        public async Task Get_all_product()
         {
             var dbcontext = await DbContextMock.GetDatabaseContext();
-            var generic = new ProductRepository(dbcontext);
-            var id = string.Empty;
+            var repo = new ProductRepository(dbcontext);
 
             //Act
-            var actual = await generic.GetProductById(id);
+            var actual = repo.GetProducts();
+
+            //Assert
+            Assert.True(actual!= null);
+        }
+
+        [Fact]
+        public async Task Get_all_product_by_name()
+        {
+            var dbcontext = await DbContextMock.GetDatabaseContext();
+            var repo = new ProductRepository(dbcontext);
+            var name = string.Empty;
+
+
+            //Act
+            var actual = await repo.GetProductByName(name);
 
             //Assert
             Assert.IsType<Product>(actual);

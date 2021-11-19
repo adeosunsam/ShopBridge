@@ -1,7 +1,6 @@
 ﻿using CloudinaryDotNet;
 using CloudinaryDotNet.Actions;
 using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 using ShopBridge_dtos;
 using ShopBridge_services.Interfaces;
@@ -15,13 +14,16 @@ namespace ShopBridge_services.Implementations
     {
         private readonly Cloudinary _cloudinary;
         private readonly ImageSettings _imageSettings;
+        public ImageService()
+        {
 
-        public ImageService(IConfiguration configuration,
-            IOptions<ImageSettings> imageSettings)
+        }
+
+        public ImageService(IOptions<ImageSettings> imageSettings)
         {
             _imageSettings = imageSettings.Value;
             _cloudinary = new Cloudinary(new Account(_imageSettings.AccountName,
-                _imageSettings.ApiKey, _imageSettings.ApiSecret));
+             _imageSettings.ApiKey, _imageSettings.ApiSecret));
         }
 
         public async Task<UploadResult> UploadImage(IFormFile image)
